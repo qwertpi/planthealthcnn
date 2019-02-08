@@ -120,7 +120,7 @@ print(model.summary())
 #same filename each time to force keras to overwrite the file each time and minimise the amount of disk space used
 savebest=callbacks.ModelCheckpoint(filepath='model.h5',monitor='val_loss',save_best_only=True)
 callbacks_list=[savebest]
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 i=0
 #set the number of epochs you want here

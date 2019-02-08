@@ -19,7 +19,7 @@ model = load_model('model.h5')
 
 #change this to the file you want to predict on
 #shoudln't have a traling /
-file="test2.jpg"
+file="test.jpg"
 #removes trailing / although I'd rather people didn't rely on this
 if file[-1]=="/":
     file[:-1]
