@@ -15,7 +15,7 @@ else:
 from os import system as bash
 
 #loads the model from the saved model file
-model = load_model('generator_model.h5')
+model = load_model('model.h5')
 
 #change this to the file you want to predict on
 #shoudln't have a traling /

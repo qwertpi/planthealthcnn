@@ -20,4 +20,4 @@ echo 'Augmenting images'
 python3 aug.py
 echo 'Adding original images to the augmented dataset'
 cp images/healthy/* augmented/healthy/ && cp images/dying/* augmented/dying/
-echo "You can now run generator train.py"
+echo "You can now run train.py"

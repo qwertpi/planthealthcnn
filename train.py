@@ -118,7 +118,7 @@ model.add(Dense(2, activation='softmax'))
 print(model.summary())
 
 #same filename each time to force keras to overwrite the file each time and minimise the amount of disk space used
-savebest=callbacks.ModelCheckpoint(filepath='generator_model.h5',monitor='val_loss',save_best_only=True)
+savebest=callbacks.ModelCheckpoint(filepath='model.h5',monitor='val_loss',save_best_only=True)
 callbacks_list=[savebest]
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 

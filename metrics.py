@@ -27,7 +27,7 @@ for i in range(0,len(listdir(x_data[1]))):
     y_data.append([1])
 
 #loads the model and x and y data
-model=load_model("generator_model.h5")
+model=load_model("model.h5")
 Y = np.array(y_data)
 X = np.array(load_images(x_data))
 

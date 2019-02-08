@@ -48,7 +48,7 @@ Everything from this point onwards can be installed using the one line command `
 3a\. Run aug.py to create new images with added noise, random brighnes and cropping `python3 aug.py`  
 3b\. (Optional) Copy your old images to augmented as well `cp images/healthy/* augmented/healthy/ && cp images/dying/* augmented/dying/`
 ## Usage
-1\. Run generator train.py to train the model `python3 "generator train.py"`  
+1\. Run train.py to train the model `python3 train.py`  
 2\. (Optional) Run metrics.py to see which images in the training data your model is failing to classify `python3 metrics.py`  
 3\. Change the file variable in predict.py to point towards the image you want to check then run it, code for live prediction on webcam feeds may or may not come in the futre  
 ## Misc
