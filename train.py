@@ -143,6 +143,8 @@ y_test=np.array(load_y(val_size))
 #creates train Y data
 Y = np.array(load_y(train_size))
 
+print(str(val_size),"validation images")
+print(str(total_images-val_size),"training images")
 try:
     #this amounts to a forever loop due to the while true in load_images
     #loads a batch of x data
