@@ -125,26 +125,28 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 i=0
 #set the number of epochs you want here
 epochs=20
-#as we do two epochs per "batch" of data halve it and round decimals up as there is little harm in doing an extra epoch
-epochs=ceil(epochs/2)
 
 #change your directories here if necesary
 dirs=["augmented/healthy/","augmented/dying/"]
 tmp_dirs=["healthy/","dying/"]
 
+#creates a validation set that is 20% of all data
+total_images=sum([len(listdir(dir)) for dir in dirs])
+val_size=round(total_images*0.2)
+#creates a training size of 64 images at a time
+train_size=64
+
 #creates val data
-#120 as this was around 25% of my dataset
-#feel free to change this
-x_test=np.array(create_val(dirs,tmp_dirs,120))
-y_test=np.array(load_y(120))
+x_test=np.array(create_val(dirs,tmp_dirs,val_size))
+y_test=np.array(load_y(val_size))
 
 #creates train Y data
-Y = np.array(load_y(64))
+Y = np.array(load_y(train_size))
 
 try:
     #this amounts to a forever loop due to the while true in load_images
     #loads a batch of x data
-    for x in load_images(dirs,64):
+    for x in load_images(dirs,train_size):
         #ends the loop if we have done enough epochs
         if i>=epochs:
             print("Bye!")
@@ -154,13 +156,19 @@ try:
         X = np.array(x)
 
         #trains for 2 epochs
-        model.fit(X, Y, epochs = 2, batch_size=64, validation_data=(x_test, y_test),callbacks=callbacks_list)
-        i+=1
+        model.fit(X, Y, initial_epoch=i,epochs = i+2, batch_size=32, validation_data=(x_test, y_test),callbacks=callbacks_list)
+        i+=2
 
     #at the end of training, cleanup
     val_cleanup(dirs,tmp_dirs)
+    
 #if there is an error (most commonly a keyboardinterrupt to stop training early)
-except:
+except Exception as e:
     print("Bye!")
     #cleanup
     val_cleanup(dirs,tmp_dirs)
+    #raise the Error after cleanup unless it was a KeyboardInterrupt
+    if e=="KeyboardInterrupt":
+        pass
+    else:
+        raise e
