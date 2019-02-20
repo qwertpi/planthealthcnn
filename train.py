@@ -7,7 +7,7 @@ import numpy as np
 from os import listdir
 from os import system as bash
 from random import randint
-from math import ceil
+from math import ceil, floor
 
 def val_cleanup(directories,tmp_dirs):
     #move all the val images back to where they came from
@@ -18,8 +18,8 @@ def val_cleanup(directories,tmp_dirs):
 
 
 def create_val(directories,tmp_dirs,num):
-    #as we do use num for both of the two classes and round decimals up as there is little harm in a little more data
-    num=ceil(num/2)
+    #as we do use num for both of the two classes
+    num=floor(num/2)
     imgs=[]
     
     #store a list of the files in each of the directories
@@ -97,7 +97,6 @@ def load_images(directories,num):
             yield imgs
             
 def load_y(num):
-    num=ceil(num/2)
     y_data=[]
     for i in range(0,num):
         y_data.append([1,0])
@@ -118,13 +117,13 @@ model.add(Dense(2, activation='softmax'))
 print(model.summary())
 
 #same filename each time to force keras to overwrite the file each time and minimise the amount of disk space used
-savebest=callbacks.ModelCheckpoint(filepath='model.h5',monitor='val_loss',save_best_only=True)
+savebest=callbacks.ModelCheckpoint(filepath='new_model.h5',monitor='val_loss',save_best_only=True)
 callbacks_list=[savebest]
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 i=0
 #set the number of epochs you want here
-epochs=20
+epochs=50
 
 #change your directories here if necesary
 dirs=["augmented/healthy/","augmented/dying/"]
@@ -138,13 +137,15 @@ train_size=64
 
 #creates val data
 x_test=np.array(create_val(dirs,tmp_dirs,val_size))
-y_test=np.array(load_y(val_size))
+y_test=np.array(load_y(floor(val_size/2)))
 
 #creates train Y data
-Y = np.array(load_y(train_size))
+Y = np.array(load_y(ceil(train_size/2)))
 
 print(str(val_size),"validation images")
 print(str(total_images-val_size),"training images")
+print(epochs,"epochs")
+
 try:
     #this amounts to a forever loop due to the while true in load_images
     #loads a batch of x data
@@ -158,8 +159,8 @@ try:
         X = np.array(x)
 
         #trains for 2 epochs
-        model.fit(X, Y, initial_epoch=i,epochs = i+2, batch_size=32, validation_data=(x_test, y_test),callbacks=callbacks_list)
-        i+=2
+        model.fit(X, Y, initial_epoch=i,epochs = i+1, batch_size=32, validation_data=(x_test, y_test),callbacks=callbacks_list)
+        i+=1
 
     #at the end of training, cleanup
     val_cleanup(dirs,tmp_dirs)

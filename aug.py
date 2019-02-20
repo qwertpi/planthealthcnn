@@ -47,7 +47,8 @@ for i in range(0,5):
         total+=1
 
 total=0
-for i in range(0,5):
+#I have roughly half as many dying images as healthy so create more augmented dying images
+for i in range(0,10):
     dying_aug = seq.augment_images(dying)
     for img in dying_aug:
         im = Image.fromarray(img)

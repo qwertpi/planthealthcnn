@@ -31,6 +31,9 @@ model=load_model("model.h5")
 Y = np.array(y_data)
 X = np.array(load_images(x_data))
 
+#prints loss and accuracy
+print(model.evaluate(X, np.array([[1,0] if y==[0] else [0,1] for y in Y]),batch_size=64))
+
 #make predictions
 test_predictions=[]
 test_confidences=[]
@@ -74,6 +77,8 @@ def visualize_incorrect_labels(x_data, y_real, y_predicted,confidences):
             figure.add_subplot(ceil(sqrt(p)),ceil(sqrt(p)),j)
             #add the ith image to the subplot
             plt.imshow(x_data[i])
+            #don't show the axis
+            plt.axis('off')
 
             #add a label of what was predicted and the confidence
             if y_predicted[i]==0:
