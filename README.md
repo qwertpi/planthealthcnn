@@ -34,21 +34,14 @@ For a summary of the licence go to https://tldrlegal.com/license/gnu-general-pub
 * ImageMagick (sic) `sudo apt-get install imagemagick`
 * libhdf5 (only needed on some systems) `sudo apt-get install libhdf5-serial-dev`
 
-Everything from this point onwards can be installed using the one line command `sudo pip3 install -r requirements.txt` after downloading the repo (after step 0)
-* OpenCV `pip3 install opencv-python`
-* imgaug `pip3 install imgaug`
-* Keras `pip3 install keras`
-* Numpy `pip3 install numpy`
-* TensorFlow `pip3 install tensorflow`
-* Scikit-Learn `pip3 install sklearn`
-* h5py `pip3 install h5py`
-* PIL`pip3 install Pillow`
+Install the python packages either running `sudo -H pip3 install -U -r requirements.txt` after downloading the repo (after step 0) or installing all the packages named in requirements.txt manually using `sudo -H pip3 install -U package-name`
 #### Setup
 0\. Download this repo `git clone https://github.com/qwertpi/planthealthcnn.git`  
 1\. Source some images of healthy and dying plants and put them in the respective folders in images  
-2\. Resize your images `cd images/healthy/ && for file in *; do convert $file -resize 224x224 -gravity center -background "rgb(0,0,0)" -extent 224x224 $file; done` then `cd ..` then `cd ..` again then `cd images/dying/ && for file in *; do convert $file -resize 224x224 -gravity center -background "rgb(0,0,0)" -extent 224x224 $file; done` then `cd ..` twice once again  
+2\. Resize your images `cd images/healthy/ && for file in *; do convert $file -resize 224x224 -gravity center -background "rgb(0,0,0)" -extent 224x224 $file; done` then `cd ..` then `cd dying/ && for file in *; do convert $file -resize 224x224 -gravity center -background "rgb(0,0,0)" -extent 224x224 $file; done` then `cd ..` then another `cd ..`  
 3a\. Run aug.py to create new images with added noise, random brighnes and cropping `python3 aug.py`  
-3b\. (Optional) Copy your old images to augmented as well `cp images/healthy/* augmented/healthy/ && cp images/dying/* augmented/dying/`
+3b\. (Optional) Copy your old images to augmented as well `cp images/healthy/* augmented/healthy/ && cp images/dying/* augmented/dying/`  
+4\. If you want to run viz.py you will have to replace the keract.py file in wherever your python packeges live with [my forked verison](https://github.com/qwertpi/keract)
 ## Usage
 1\. Run train.py to train the model `python3 train.py`  
 2\. (Optional) Run metrics.py to see which images in the training data your model is failing to classify `python3 metrics.py`  
