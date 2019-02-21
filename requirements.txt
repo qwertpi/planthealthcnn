@@ -4,5 +4,7 @@ numpy>=1.14.3
 Keras>=2.2
 h5py>=2.8.0
 Pillow>=5.2.0
-opencv-python==3.4.2.17
-imgaug==0.2.7
+opencv-python>=3.4.2.17
+imgaug>=0.2.7
+matplotlib>=2.2.3
+keract>=2.2.1
