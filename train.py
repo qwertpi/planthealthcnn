@@ -1,5 +1,5 @@
 from keras.models import Sequential
-from keras.layers import Dropout, Flatten, Dense
+from keras.layers import Flatten, Dense
 from keras.applications import mobilenet
 from keras import callbacks
 from keras.preprocessing import image
