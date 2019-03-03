@@ -164,14 +164,18 @@ try:
 
     #at the end of training, cleanup
     val_cleanup(dirs,tmp_dirs)
-    
-#if there is an error (most commonly a keyboardinterrupt to stop training early)
+
+#as KeyboardInterrupts aren't caught by except Exception
+except KeyboardInterrupt:
+    print("Bye!")
+    #cleanup
+    val_cleanup(dirs,tmp_dirs)
+
+#if there is an error
 except Exception as e:
     print("Bye!")
     #cleanup
     val_cleanup(dirs,tmp_dirs)
-    #raise the Error after cleanup unless it was a KeyboardInterrupt
-    if e=="KeyboardInterrupt":
-        pass
-    else:
-        raise e
+    
+    #raise the error now that we've cleaned up
+    raise e
