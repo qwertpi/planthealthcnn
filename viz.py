@@ -43,10 +43,10 @@ img=np.array([img/255])
 cnn=model.layers[0]
 #compiles the mobilenet model else Keras throws a hissy fit
 cnn.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-print(cnn.summary)
+
 #loops over each layer number
 for i in range(1,14):
     #gets the acitvations of the layer number
     activations = keract.get_activations(cnn, img,"conv_pw_"+str(i))
     #displays the activations
-    keract.display_activation(activations,save=True)
+    keract.display_activations(activations,save=True)
