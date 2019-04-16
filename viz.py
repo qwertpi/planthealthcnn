@@ -49,4 +49,4 @@ for i in range(1,14):
     #gets the acitvations of the layer number
     activations = keract.get_activations(cnn, img,"conv_pw_"+str(i))
     #displays the activations
-    keract.display_activations(activations,save=True)
+    keract.display_activations(activations,"gray")
