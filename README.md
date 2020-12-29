@@ -2,10 +2,6 @@
 
 A CNN that uses transfer learning on mobilenet to decide if an image of a plant contains a healthy plant or a dying plant. This is essentially my [catdogcnn](https://github.com/qwertpi/catvdogcnn) code modified to work on 224x224 images of healthy and dying plants. I sourced my training images using the chrome extension [fatkun batch image download](https://chrome.google.com/webstore/detail/fatkun-batch-download-ima/nnjjahlikiabnchcpehcpkdeckfgnohf?hl=en) and google images.
 
-WARNING ONLY LINUX IS OFFICIALLY SUPPORTED
-
-Feedback and pull requests are very welcome
-
 ![A gif of an image going through the network](viz.gif?raw=true "An image going through the network")
 
 ## Copyright 
